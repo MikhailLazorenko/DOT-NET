@@ -1,4 +1,5 @@
 using System;
+using System.Text; // Необхідно для StringBuilder
 using System.Windows.Forms;
 
 public partial class Form1 : Form
@@ -40,31 +41,31 @@ public partial class Form1 : Form
     private void SubmitData(object sender, EventArgs e)
     {
         string gender = maleRadioButton.Checked ? "Чоловіча" : "Жіноча";
-        string interests = "";
+        var interests = new StringBuilder(); // Використання StringBuilder для інтересів
 
-        if (computersCheckBox.Checked) interests += "Комп'ютери, ";
-        if (sportsCheckBox.Checked) interests += "Спорт, ";
-        if (artCheckBox.Checked) interests += "Мистецтво, ";
-        if (scienceCheckBox.Checked) interests += "Наука, ";
+        if (computersCheckBox.Checked) interests.Append("Комп'ютери, ");
+        if (sportsCheckBox.Checked) interests.Append("Спорт, ");
+        if (artCheckBox.Checked) interests.Append("Мистецтво, ");
+        if (scienceCheckBox.Checked) interests.Append("Наука, ");
 
         // Видалити останню кому і пробіл, якщо інтереси не пусті
-        if (interests.Length > 0)
-        {
-            interests = interests.Substring(0, interests.Length - 2); // Видалити останню кому і пробіл
-        }
+        string interestsString = interests.Length > 0
+            ? interests.ToString().Substring(0, interests.Length - 2) // Видалити останню кому і пробіл
+            : "";
 
         // Формуємо повідомлення у змінній
-        string message = $"Дані відправлено!\n\n" +
-                         $"Ім'я: {nameTextBox.Text}\n" +
-                         $"Пароль: {passwordTextBox.Text}\n" +
-                         $"Вік: {ageComboBox.SelectedItem}\n" +
-                         $"Стать: {gender}\n" +
-                         $"Інтереси: {interests}\n" +
-                         $"Файл: {opinionFileTextBox.Text}\n" +
-                         $"Думка: {opinionTextBox.Text}";
+        var messageBuilder = new StringBuilder();
+        messageBuilder.AppendLine("Дані відправлено!\n");
+        messageBuilder.AppendLine($"Ім'я: {nameTextBox.Text}");
+        messageBuilder.AppendLine($"Пароль: {passwordTextBox.Text}");
+        messageBuilder.AppendLine($"Вік: {ageComboBox.SelectedItem}");
+        messageBuilder.AppendLine($"Стать: {gender}");
+        messageBuilder.AppendLine($"Інтереси: {interestsString}");
+        messageBuilder.AppendLine($"Файл: {opinionFileTextBox.Text}");
+        messageBuilder.AppendLine($"Думка: {opinionTextBox.Text}");
 
         // Відображення повідомлення
-        MessageBox.Show(message, "Підтвердження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show(messageBuilder.ToString(), "Підтвердження", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     [STAThread]
