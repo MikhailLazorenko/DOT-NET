@@ -28,7 +28,7 @@ public partial class Form1 : Form
         using (OpenFileDialog openFileDialog = new OpenFileDialog())
         {
             openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.Title = "Виберіть файл";
+            openFileDialog.Title = "Р’РёР±РµСЂС–С‚СЊ С„Р°Р№Р»";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -39,19 +39,32 @@ public partial class Form1 : Form
 
     private void SubmitData(object sender, EventArgs e)
     {
-        string gender = maleRadioButton.Checked ? "Чоловіча" : "Жіноча";
+        string gender = maleRadioButton.Checked ? "Р§РѕР»РѕРІС–С‡Р°" : "Р–С–РЅРѕС‡Р°";
         string interests = "";
-        if (computersCheckBox.Checked) interests += "Комп'ютери, ";
-        if (sportsCheckBox.Checked) interests += "Спорт, ";
-        if (artCheckBox.Checked) interests += "Мистецтво, ";
-        if (scienceCheckBox.Checked) interests += "Наука, ";
 
+        if (computersCheckBox.Checked) interests += "РљРѕРјРї'СЋС‚РµСЂРё, ";
+        if (sportsCheckBox.Checked) interests += "РЎРїРѕСЂС‚, ";
+        if (artCheckBox.Checked) interests += "РњРёСЃС‚РµС†С‚РІРѕ, ";
+        if (scienceCheckBox.Checked) interests += "РќР°СѓРєР°, ";
+
+        // Р’РёРґР°Р»РёС‚Рё РѕСЃС‚Р°РЅРЅСЋ РєРѕРјСѓ С– РїСЂРѕР±С–Р», СЏРєС‰Рѕ С–РЅС‚РµСЂРµСЃРё РЅРµ РїСѓСЃС‚С–
         if (interests.Length > 0)
         {
-            interests = interests.Substring(0, interests.Length - 2); // Видалити останню кому і пробіл
+            interests = interests.Substring(0, interests.Length - 2); // Р’РёРґР°Р»РёС‚Рё РѕСЃС‚Р°РЅРЅСЋ РєРѕРјСѓ С– РїСЂРѕР±С–Р»
         }
 
-        MessageBox.Show($"Дані відправлено!\n\nІм'я: {nameTextBox.Text}\nПароль: {passwordTextBox.Text}\nВік: {ageComboBox.SelectedItem}\nСтать: {gender}\nІнтереси: {interests}\nФайл: {opinionFileTextBox.Text}\nДумка: {opinionTextBox.Text}", "Підтвердження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        // Р¤РѕСЂРјСѓС”РјРѕ РїРѕРІС–РґРѕРјР»РµРЅРЅСЏ Сѓ Р·РјС–РЅРЅС–Р№
+        string message = $"Р”Р°РЅС– РІС–РґРїСЂР°РІР»РµРЅРѕ!\n\n" +
+                         $"Р†Рј'СЏ: {nameTextBox.Text}\n" +
+                         $"РџР°СЂРѕР»СЊ: {passwordTextBox.Text}\n" +
+                         $"Р’С–Рє: {ageComboBox.SelectedItem}\n" +
+                         $"РЎС‚Р°С‚СЊ: {gender}\n" +
+                         $"Р†РЅС‚РµСЂРµСЃРё: {interests}\n" +
+                         $"Р¤Р°Р№Р»: {opinionFileTextBox.Text}\n" +
+                         $"Р”СѓРјРєР°: {opinionTextBox.Text}";
+
+        // Р’С–РґРѕР±СЂР°Р¶РµРЅРЅСЏ РїРѕРІС–РґРѕРјР»РµРЅРЅСЏ
+        MessageBox.Show(message, "РџС–РґС‚РІРµСЂРґР¶РµРЅРЅСЏ", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     [STAThread]
