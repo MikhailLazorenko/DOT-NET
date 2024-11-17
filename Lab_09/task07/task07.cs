@@ -13,26 +13,22 @@ namespace Lab09
         // Метод, що обробляє натискання кнопки OK
         private void buttonOK_Click()
         {
-            int quantity;
-            if (int.TryParse(textBoxQuantity.Text, out quantity))
+            if (int.TryParse(textBoxQuantity.Text, out int quantity))
             {
-                int price = 0;
+                // Використання switch expression для визначення ціни
+                int price = radioButton1.Checked ? 12000 :
+                            radioButton2.Checked ? 9000 :
+                            radioButton3.Checked ? 7000 : 0;
 
-                if (radioButton1.Checked)
+                if (price > 0)
                 {
-                    price = 12000;
+                    int totalCost = quantity * price;
+                    resultLabel.Text = $"Загальна вартість: {totalCost} грн";
                 }
-                else if (radioButton2.Checked)
+                else
                 {
-                    price = 9000;
+                    resultLabel.Text = "Оберіть товар.";
                 }
-                else if (radioButton3.Checked)
-                {
-                    price = 7000;
-                }
-
-                int totalCost = quantity * price;
-                resultLabel.Text = "Загальна вартість: " + totalCost + " грн";
             }
             else
             {
