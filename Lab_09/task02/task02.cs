@@ -5,6 +5,9 @@ namespace Lab09
 {
     public partial class task02 : Form
     {
+        // Константа для курсу обміну
+        private const double ExchangeRateUAHToMXN = 2.04;
+
         public task02()
         {
             InitializeComponent();
@@ -34,8 +37,7 @@ namespace Lab09
         {
             if (double.TryParse(textBox1.Text, out double amountInUAH))
             {
-                double exchangeRate = 2.04;
-                double amountInMXN = amountInUAH / exchangeRate;
+                double amountInMXN = amountInUAH / ExchangeRateUAHToMXN;
                 label2.Text = "Сума у песо: " + amountInMXN.ToString("F2");
             }
             else
@@ -58,11 +60,11 @@ namespace Lab09
 
                 if (fromCurrency == "Гривня" && toCurrency == "Мексиканське песо")
                 {
-                    convertedAmount = amount / 2.04; // Конвертуємо з гривні в мексиканське песо
+                    convertedAmount = amount / ExchangeRateUAHToMXN; // Конвертуємо з гривні в мексиканське песо
                 }
                 else if (fromCurrency == "Мексиканське песо" && toCurrency == "Гривня")
                 {
-                    convertedAmount = amount * 2.04; // Конвертуємо з мексиканського песо в гривню
+                    convertedAmount = amount * ExchangeRateUAHToMXN; // Конвертуємо з мексиканського песо в гривню
                 }
 
                 label2.Text = $"Сума: {convertedAmount:F2} {toCurrency}";

@@ -5,6 +5,9 @@ namespace Lab09
 {
     public partial class task01 : Form
     {
+        // Константа для курсу обміну
+        private const double ExchangeRateUAHToMXN = 2.04;
+
         public task01()
         {
             InitializeComponent();
@@ -38,8 +41,7 @@ namespace Lab09
         {
             if (double.TryParse(textBox1.Text, out double amountInUAH))
             {
-                double exchangeRate = 2.04;
-                double amountInMXN = amountInUAH / exchangeRate;
+                double amountInMXN = amountInUAH / ExchangeRateUAHToMXN;
                 label2.Text = "Сума у песо: " + amountInMXN.ToString("F2");
             }
             else
