@@ -15,7 +15,7 @@ namespace Lab09
         {
             if (int.TryParse(textBoxQuantity.Text, out int quantity))
             {
-                // Використання switch expression для визначення ціни
+                // Використання тернарного умовного оператора для визначення ціни
                 int price = radioButton1.Checked ? 12000 :
                             radioButton2.Checked ? 9000 :
                             radioButton3.Checked ? 7000 : 0;
